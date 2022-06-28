@@ -1,1 +1,1 @@
-# @sami/compile-code
+# @sam-logic/compile-code

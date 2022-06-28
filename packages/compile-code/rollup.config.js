@@ -1,6 +1,5 @@
 import path from 'path';
 import rollupBaseConfig from '../../rollup.config';
-import typescript from 'rollup-plugin-typescript';
 import pkg from './package.json';
 
 export default Object.assign(rollupBaseConfig, {
@@ -14,7 +13,5 @@ export default Object.assign(rollupBaseConfig, {
             format: 'es',
         },
     ],
-    plugins: [
-        typescript(),
-    ]
+    plugins: []
 });

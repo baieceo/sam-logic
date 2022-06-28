@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// const path = require('path');
-// const prePublish = require('../../../scripts/prepublish');
+const path = require('path');
+const prePublish = require('../../../scripts/prepublish');
 
-// prePublish('@sami/compile-code', path.join(__dirname, '../'));
+prePublish('@sam-logic/compile-code', path.join(__dirname, '../'));

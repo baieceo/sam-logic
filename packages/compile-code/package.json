@@ -1,6 +1,6 @@
 {
     "name": "@sam-logic/compile-code",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "sami compile code",
     "main": "dist/core.common.js",
     "module": "dist/core.esm.js",
@@ -21,15 +21,14 @@
     ],
     "scripts": {
         "prepublishOnly": "node scripts/prepublish.js",
-        "declare-type": "tsc --emitDeclarationOnly",
-        "build": "rollup -c & npm run declare-type",
+        "build": "rollup -c",
         "watch": "watch \"npm run build\" ./src"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/baieceo/vue-imove.git"
+        "url": "git+https://github.com/baieceo/sam-logic.git"
     },
-    "author": "smallstonesk",
+    "author": "baieceo",
     "license": "MIT",
     "dependencies": {
         "@antv/x6": "^1.5.1"
