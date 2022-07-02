@@ -13,7 +13,7 @@ const addPlugins = (originalCode = '', plugins = [], options) => {
             return plugins.map((_, index) => `logic.use(plugin${index});`).join('\n');
         })
         .replace(new RegExp(INSERT_USE_CUSTOM_CODE), () => {
-            return options.custemCode['index.js'];
+            return options.customCode['index.js'];
         });
     return modifiedContent;
 };
