@@ -412,8 +412,9 @@ const compile$1 = (dsl, mockInput) => {
 
 const INSERT_IMPORT_PLUGINS_COMMENT = '// import plugins here';
 const INSERT_USE_PLUGINS_COMMENT = '// use plugins here';
+const INSERT_USE_CUSTOM_CODE = '// use custom code';
 
-const addPlugins = (originalCode = '', plugins = []) => {
+const addPlugins = (originalCode = '', plugins = [], options) => {
     const modifiedContent = originalCode
         .replace(new RegExp(INSERT_IMPORT_PLUGINS_COMMENT), () => {
             return plugins
@@ -422,6 +423,9 @@ const addPlugins = (originalCode = '', plugins = []) => {
         })
         .replace(new RegExp(INSERT_USE_PLUGINS_COMMENT), () => {
             return plugins.map((_, index) => `logic.use(plugin${index});`).join('\n');
+        })
+        .replace(new RegExp(INSERT_USE_CUSTOM_CODE), () => {
+            return options.custemCode['index.js'];
         });
     return modifiedContent;
 };
@@ -476,15 +480,17 @@ const logic = new Logic({ dsl });
 
 // use plugins here
 
+// use custom code
+
 export default logic;
 `;
 
-const compile = (dsl, plugins = []) => {
+const compile = (dsl, plugins = [], options = {customCode: {'index.js': ''}}) => {
     const output = {
         nodeFns: extract(dsl),
         'context.js': contextTpl,
         'dsl.json': JSON.stringify(simplifyDSL(dsl), null, 2),
-        'index.js': addPlugins(indexTpl, plugins),
+        'index.js': addPlugins(indexTpl, plugins, options),
         'logic.js': logicTpl,
     };
     return output;
