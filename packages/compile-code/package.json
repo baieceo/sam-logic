@@ -1,6 +1,6 @@
 {
     "name": "@sam-logic/compile-code",
-    "version": "0.1.1",
+    "version": "0.0.3",
     "description": "sami compile code",
     "main": "dist/core.common.js",
     "module": "dist/core.esm.js",
@@ -20,7 +20,6 @@
         "compile code"
     ],
     "scripts": {
-        "prepublishOnly": "node scripts/prepublish.js",
         "build": "rollup -c",
         "watch": "watch \"npm run build\" ./src"
     },

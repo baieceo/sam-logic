@@ -19,6 +19,7 @@
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@rollup/plugin-strip": "^2.1.0",
+        "ora": "^6.1.2",
         "postcss": "^8.4.14",
         "rollup": "^2.75.7",
         "rollup-plugin-postcss": "^4.0.2",
