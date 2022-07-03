@@ -251,11 +251,14 @@ const makeCode = (mockNode, mockInput) => `
   // instantiation and invoke
   const logic = new Logic({ dsl });
   logic.use(mockPlugin);
+
+  // use custom code start
   logic.invoke('$TRIGGER$', {}, (pipe) => {
     const ctx = logic._getUnsafeCtx();
     const context = ctx.getContext();
     window.dispatchEvent(new CustomEvent('samiOnlineExecEnds', {detail: {pipe, context}}));
   });
+  // use custom code end
 })().catch(err => {
   console.error(err.message);
   window.dispatchEvent(new CustomEvent('samiOnlineExecEnds', {detail: {error: {message: err.message}}}));
@@ -312,6 +315,8 @@ const simplifyDSL = (dsl) => {
 
 const INSERT_DSL_COMMENT = '// define dsl here';
 const INSERT_NODE_FNS_COMMENT = '// define nodeFns here';
+const INSERT_USE_CUSTOM_CODE_START = '// use custom code start';
+const INSERT_USE_CUSTOM_CODE_END = '// use custom code end';
 const importRegex = /import\s([\s\S]*?)\sfrom\s('|")((@\w[\w\.\-]+\/)?(\w[\w\.\-\/]+))\2/gm;
 const virtualSourceNode = {
     id: 'virtual-sami-start',
@@ -401,13 +406,23 @@ const compileNodeFnsMap = (dsl) => {
     return `const nodeFns = {\n  ${kvs.join(',\n  ')}\n}`;
 };
 
-const compile$1 = (dsl, mockInput) => {
+const compile$1 = (dsl, mockInput, options = { customCode: { 'index.js': '' } }) => {
     const startNode = findStartNode(dsl);
     const mockNode = getNextNode(startNode, dsl);
-    return makeCode(mockNode, mockInput)
+
+    let output = makeCode(mockNode, mockInput)
         .replace(INSERT_DSL_COMMENT, compileSimplifiedDSL(dsl))
         .replace(INSERT_NODE_FNS_COMMENT, compileNodeFnsMap(dsl))
         .replace('$TRIGGER$', startNode.data.trigger);
+
+    const start = output.substring(0, output.indexOf(INSERT_USE_CUSTOM_CODE_START));
+    const end = output.substring(output.indexOf(INSERT_USE_CUSTOM_CODE_END));
+
+    if (options.customCode['index.js']) {
+        output = start + options.customCode['index.js'] + end;
+    }
+
+    return output;
 };
 
 const INSERT_IMPORT_PLUGINS_COMMENT = '// import plugins here';
