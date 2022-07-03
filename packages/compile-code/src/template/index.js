@@ -1,4 +1,4 @@
-export default `import Logic from './logic';
+export default `import Logic from './logic.js';
 import dsl from './dsl.json';
 // import plugins here
 

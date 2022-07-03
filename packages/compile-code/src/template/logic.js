@@ -1,5 +1,5 @@
-export default `import nodeFns from './nodeFns';
-import Context from './context';
+export default `import nodeFns from './nodeFns/index.js';
+import Context from './context.js';
 import EventEmitter from 'eventemitter3';
 
 const LIFECYCLE = new Set(['ctxCreated', 'enterNode', 'leaveNode']);

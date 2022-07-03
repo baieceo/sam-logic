@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var logicTpl = `import nodeFns from './nodeFns';
-import Context from './context';
+var logicTpl = `import nodeFns from './nodeFns/index.js';
+import Context from './context.js';
 import EventEmitter from 'eventemitter3';
 
 const LIFECYCLE = new Set(['ctxCreated', 'enterNode', 'leaveNode']);
@@ -476,7 +476,7 @@ const extract = (dsl) => {
     return nodeFns;
 };
 
-var indexTpl = `import Logic from './logic';
+var indexTpl = `import Logic from './logic.js';
 import dsl from './dsl.json';
 // import plugins here
 

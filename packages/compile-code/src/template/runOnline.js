@@ -1,5 +1,5 @@
-import logic from './logic';
-import context from './context';
+import logic from './logic.js';
+import context from './context.js';
 
 const makeCode = (mockNode, mockInput) => `
 (async function run() {
