@@ -16,7 +16,7 @@ const makeCode = (mockNode, mockInput) => `
     .replace(/export\s+default/, '')
     .replace(
       `import EventEmitter from 'eventemitter3';`,
-      `const EventEmitter = (await import('https://jspm.dev/eventemitter3')).default;`,
+      `const EventEmitter = window.EventEmitter || (await import('https://jspm.dev/eventemitter3')).default;`,
     )}
 
   // DSL
