@@ -1,6 +1,6 @@
 {
     "name": "@sam-logic/compile-code",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "sami compile code",
     "main": "dist/core.common.js",
     "module": "dist/core.esm.js",
